@@ -41,4 +41,16 @@ function showQuestion(){locked=false;$('quizNext').classList.add('hide');$('quiz
 function answer(opt,b){if(locked)return;locked=true;const q=quiz[qi],ok=opt===q.correct;if(ok)score++;Array.from($('quizAnswers').children).forEach(x=>{x.disabled=true;if(x.textContent===q.correct)x.classList.add('correct');else if(x===b)x.classList.add('wrong')});$('quizFeedback').className='feedback '+(ok?'good':'warn');$('quizFeedback').textContent=ok?'Corretto!':`Risposta corretta: ${q.correct}.`;$('quizScore').textContent=`Corrette: ${score}`;$('quizNext').classList.remove('hide');$('quizNext').textContent=qi===9?'Vedi risultato →':'Domanda successiva →';}
 $('quizNext').onclick=()=>{qi++;if(qi>=10){$('quizQuestion').textContent='Test completato!';$('quizAnswers').innerHTML='';$('quizFeedback').classList.add('hide');$('quizNext').classList.add('hide');$('quizProgress').style.width='100%';$('quizCounter').textContent='10 su 10';const pass=score>=7;$('quizOutcome').textContent=`Punteggio ${score}/10 (${score*10}%). ${pass?'Obiettivo raggiunto! Puoi stampare l’attestato.':'Ripassa gli argomenti e riprova con nuove domande.'}`;$('certControls').classList.toggle('hide',!pass);$('quizEnd').classList.remove('hide');}else showQuestion()};$('quizRestart').onclick=newQuiz;newQuiz();
 $('printCert').onclick=()=>{const name=$('studentName').value.trim();if(!name){$('studentName').focus();$('studentName').setCustomValidity('Inserisci il nome per l’attestato');$('studentName').reportValidity();return;}$('studentName').setCustomValidity('');$('certName').textContent=name;$('certResult').textContent=`Risultato: ${score}/10 risposte corrette (${score*10}%)`;$('certDate').textContent='Data: '+new Date().toLocaleDateString('it-IT');window.print()};
-</script></body></html>
+</script>
+<div style="
+  text-align: center;
+  padding: 12px;
+  font-size: 12px;
+  color: #777;
+  font-family: Arial, sans-serif;
+">
+  © 2026 – Mate Matica e la magia nella formula
+  <br>
+  Tutti i diritti riservati
+</div>
+</body></html>
